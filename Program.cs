@@ -1,166 +1,177 @@
 ﻿namespace Project
 {
-    namespace Project
+    class Program
     {
-        class Program
+        static void Main(string[] args)
         {
-            static void Main(string[] args)
-            {
-                Console.CursorVisible = false;
-                Console.SetWindowSize(120, 40);
+            Console.CursorVisible = false;
+            Console.SetWindowSize(120, 40);
 
-                List<Állat> állatok = new List<Állat>
+            List<Állat> állatok = new List<Állat>
             {
-                new Állat("Oroszlán", "Felis leo"),
-                new Állat("Zebra", "Equus quagga"),
-                new Állat("Krokodil", "Crocodylus niloticus"),
-                new Állat("Elefánt", "Loxodonta africana")
+                new Állat("Ödön" ,"Oroszlán"),
+                new Állat("Ziga", "Zebra"),
+                new Állat("Cheetos","Krokodil"),
+                new Állat("Trianon","Elefánt"),
+                new Állat("Nigusz", "Csiga"),
+                new Állat("Alejandro", "Majom"),
+                new Állat("T-rex", "Capibara")
             };
 
-                Gondozó gondozó = new Gondozó("János");
-                Gondozó gondozó2 = new Gondozó("Miklós");
-
-                Ketrec oroszlánKetrec = new Ketrec("Oroszlán ketrecét", new List<Állat>() { állatok[0] });
-                Ketrec zebraKetrec = new Ketrec("Zebra ketrecét", new List<Állat>() { állatok[1] });
-                Ketrec krokodilKetrec = new Ketrec("Krokodil ketrecét", new List<Állat>() { állatok[2] });
-                Ketrec elefántKetrec = new Ketrec("Elefánt ketrecét", new List<Állat>() { állatok[3] });
-
-                Random random = new Random();
-                List<Látogató> látogatók = new List<Látogató>
+            List<Gondozó> gondozós = new List<Gondozó>()
             {
-                new Látogató("Anna", random.Next(0,2) == 0),
+                new Gondozó("János"),
+                new Gondozó("Miklós")
+            };
+
+            List<Ketrec> ketrecs = new List<Ketrec>()
+            {
+                new Ketrec("Oroszlán ketrecét", new List<Állat>() { állatok[0] }),
+                new Ketrec("Zebra ketrecét", new List<Állat>() { állatok[1] }),
+                new Ketrec("Krokodil ketrecét", new List<Állat>() { állatok[2] }),
+                new Ketrec("Elefánt ketrecét", new List<Állat>() { állatok[3] }),
+                new Ketrec("Csiga ketrecét", new List<Állat>() { állatok[4] }),
+                new Ketrec("Majom ketrecét", new List<Állat>() { állatok[5] }),
+                new Ketrec("Capibara ketrecét", new List<Állat>() { állatok[6] })
+            };
+
+            Random random = new Random();
+            List<Látogató> látogatók = new List<Látogató>
+            {
+                new Látogató("Anasztázia", random.Next(0,2) == 0),
                 new Látogató("Béla", random.Next(0,2) == 0),
                 new Látogató("Csilla", random.Next(0,2) == 0),
-                new Látogató("Dávid", random.Next(0,2) == 0)
+                new Látogató("Emil", random.Next(0,2) == 0),
+                new Látogató("Cigusz", random.Next(0,2) == 0),
+                new Látogató("Horthy", random.Next(0,2) == 0),
+                new Látogató("Viktor", random.Next(0,2) == 0),
+                new Látogató("Tamáß", random.Next(0,2) == 0)
             };
 
-                double napiBevetel = 0;
+            double napiBevetel = 0;
 
-                while (true)
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Állatkert Szimuláció");
+                Console.WriteLine("1. Új állat hozzáadása");
+                Console.WriteLine("2. Új gondozó felvétele");
+                Console.WriteLine("3. Szimuláció futtatása");
+                Console.WriteLine("4. Kilépés");
+                Console.Write("Válasszon egy lehetőséget: ");
+                string választás = Console.ReadLine();
+
+                switch (választás)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Állatkert Szimuláció");
-                    Console.WriteLine("1. Új állat hozzáadása");
-                    Console.WriteLine("2. Új gondozó felvétele");
-                    Console.WriteLine("3. Szimuláció futtatása");
-                    Console.WriteLine("4. Kilépés");
-                    Console.Write("Válasszon egy lehetőséget: ");
-                    string választás = Console.ReadLine();
+                    case "1":
+                        // Új állat 
+                        Console.Write("Állat neve: ");
+                        string állatNév = Console.ReadLine();
+                        Console.Write("Állat faja: ");
+                        string állatFajta = Console.ReadLine();
+                        állatok.Add(new Állat(állatNév, állatFajta));
+                        ketrecs.Add(new Ketrec(állatNév + " ketrecét", new List<Állat> { new Állat(állatNév, állatFajta) }));
+                        Console.WriteLine("Új állat hozzáadva!");
+                        Console.ReadLine();
+                        break;
 
-                    switch (választás)
-                    {
-                        case "1":
-                            // Új állat hozzáadása
-                            Console.Write("Állat neve: ");
-                            string állatNév = Console.ReadLine();
-                            Console.Write("Állat faja: ");
-                            string állatFajta = Console.ReadLine();
-                            állatok.Add(new Állat(állatNév, állatFajta));
-                            Console.WriteLine("Új állat hozzáadva!");
-                            Console.ReadLine();
-                            break;
+                    case "2":
+                        // Új gondozó 
+                        Console.Write("Gondozó neve: ");
+                        string gondozóNév = Console.ReadLine();
+                        gondozós.Add(new Gondozó(gondozóNév));
+                        Console.WriteLine("Új gondozó felvéve!");
+                        Console.ReadLine();
+                        break;
 
-                        case "2":
-                            // Új gondozó felvétele
-                            Console.Write("Gondozó neve: ");
-                            string gondozóNév = Console.ReadLine();
-                            gondozó2 = new Gondozó(gondozóNév);
-                            Console.WriteLine("Új gondozó felvéve!");
-                            Console.ReadLine();
-                            break;
+                    case "3":
 
-                        case "3":
+                        Console.WriteLine("Hány napot szeretne szimulálni?");
+                        int napokSzáma = int.Parse(Console.ReadLine()!);
 
-                            Console.WriteLine("Hány napot szeretne szimulálni?");
-                            int napokSzáma = int.Parse(Console.ReadLine()!);
+                        for (int nap = 1; nap <= napokSzáma; nap++)
+                        {
+                            foreach (var látogató in látogatók)
+                                látogató.Diák = random.Next(0, 2) == 0;
 
-                            for (int nap = 1; nap <= napokSzáma; nap++)
+                            Console.Clear();
+                            Console.WriteLine($"--- {nap}. nap ---");
+
+                            // Szökés
+                            int szokhet = random.Next(0, 10);
+                            if (szokhet == 4) 
                             {
-                                foreach (var látogató in látogatók)
-                                    látogató.Diák = random.Next(0, 2) == 0;
+                                int index = random.Next(0, állatok.Count);
+                                Állat szökőÁllat = állatok[index];
+                                állatok.Remove(szökőÁllat);
+                                Console.WriteLine($"Figyelem! {szökőÁllat.Név}, a {szökőÁllat.Fajta} elszökött!");
+                            }
 
-                                Console.Clear();
-                                Console.WriteLine($"--- {nap}. nap ---");
+                            Console.WriteLine("\nÁllatok tevékenységei:");
+                            Velemeny(állatok, állat => Kiírás(állat.Eszik(), ConsoleColor.Yellow));
+                            Velemeny(állatok, állat => Kiírás(állat.Mozog(), ConsoleColor.Cyan));
 
-                                // Állatok tevékenységei
-                                Console.WriteLine("\nÁllatok tevékenységei:");
-                                Velemeny(állatok, állat => Kiírás(állat.Eszik(), ConsoleColor.Yellow));
-                                Velemeny(állatok, állat => Kiírás(állat.Mozog(), ConsoleColor.Cyan));
 
-                                // Gondozó tevékenysége
-                                Console.WriteLine("\nGondozó tevékenysége:");
-                                foreach (var ketrec in new List<Ketrec> { oroszlánKetrec, zebraKetrec, krokodilKetrec, elefántKetrec })
-                                {
-                                    int randomGondozó = random.Next(0, 2);
-                                    if (randomGondozó == 0)
-                                    {
-                                        Kiírás(gondozó.Etet(ketrec), ConsoleColor.Green);
-                                    }
-                                    else
-                                    {
-                                        Kiírás(gondozó2.Etet(ketrec), ConsoleColor.Green);
-                                    }
+                            Console.WriteLine("\nGondozó tevékenysége:");
+                            foreach (var ketrec in ketrecs)
+                            {
+                                int randomGondozó = random.Next(0, gondozós.Count);
+                                Kiírás(gondozós[randomGondozó].Etet(ketrec), ConsoleColor.Green);
+                                Kiírás(gondozós[randomGondozó].Tisztít(ketrec), ConsoleColor.Magenta);
+                            }
 
-                                    if (randomGondozó == 0)
-                                    {
-                                        Kiírás(gondozó.Tisztít(ketrec), ConsoleColor.Magenta);
-                                    }
-                                    else
-                                    {
-                                        Kiírás(gondozó2.Tisztít(ketrec), ConsoleColor.Magenta);
-                                    }
-                                }
 
-                                // Látogatók tevékenysége és belépő
-                                Console.WriteLine("\nLátogatók tevékenysége:");
-                                Random rand = new Random();
-                                foreach (var látogató in látogatók)
+                            Console.WriteLine("\nLátogatók tevékenysége:");
+                            int latogatok_szama = 0;
+                            foreach (var látogató in látogatók)
+                            {
+                                if (random.Next(0, 2) == 0)
                                 {
                                     Kiírás(látogató.Nézelődik(), ConsoleColor.White);
                                     napiBevetel += látogató.Belépő();
+                                    latogatok_szama++;
                                 }
-
-                                Console.WriteLine($"\n--- {nap}. nap vége ---");
-                                Console.WriteLine($"\nLátogatók száma: {látogatók.Count}");
-                                Console.WriteLine($"A szimulációban összesen {napiBevetel} Ft-ot keresett az állatkert.");
-                                Console.WriteLine("A nap eseményei sikeresen megtörténtek.\n");
-
-                                Console.WriteLine("Nyomjon Enter-t a következő naphoz...");
-                                Console.ReadLine();
                             }
 
-                            Console.WriteLine("A szimuláció befejeződött.");
-                            break;
+                            Console.WriteLine($"\n--- {nap}. nap vége ---");
+                            Console.WriteLine($"\nLátogatók száma: {latogatok_szama}");
+                            Console.WriteLine($"A szimulációban összesen {napiBevetel} Ft-ot keresett az állatkert.");
+                            Console.WriteLine("A nap eseményei sikeresen megtörténtek.\n");
 
-                        case "4":
-                            return;
+                            Console.WriteLine("Nyomjon Enter-t a következő naphoz...");
+                            Console.ReadLine();
+                        }
 
-                        default:
-                            Console.WriteLine("Érvénytelen választás. Próbálja újra.");
-                            break;
-                    }
+                        Console.WriteLine("A szimuláció befejeződött.");
+                        break;
+
+                    case "4":
+                        return;
+
+                    default:
+                        Console.WriteLine("Érvénytelen választás. Próbálja újra.");
+                        break;
                 }
-            }
-
-            static void Velemeny(List<Állat> állatok, Action<Állat> tevékenységVégrehajtás)
-            {
-                Random random = new Random();
-                int szám = random.Next(1, 3);
-                var véletlenszerűÁllatok = állatok.OrderBy(a => random.Next()).Take(szám).ToList();
-
-                foreach (var állat in véletlenszerűÁllatok)
-                {
-                    tevékenységVégrehajtás(állat);
-                }
-            }
-
-            static void Kiírás(string üzenet, ConsoleColor szín)
-            {
-                Console.ForegroundColor = szín;
-                Console.WriteLine(üzenet);
-                Console.ResetColor();
             }
         }
 
+        static void Velemeny(List<Állat> állatok, Action<Állat> tevékenységVégrehajtás)
+        {
+            Random random = new Random();
+            int szám = random.Next(1, állatok.Count);
+            var véletlenszerűÁllatok = állatok.OrderBy(a => random.Next()).Take(szám).ToList();
+
+            foreach (var állat in véletlenszerűÁllatok)
+            {
+                tevékenységVégrehajtás(állat);
+            }
+        }
+
+        static void Kiírás(string üzenet, ConsoleColor szín)
+        {
+            Console.ForegroundColor = szín;
+            Console.WriteLine(üzenet);
+            Console.ResetColor();
+        }
     }
 }

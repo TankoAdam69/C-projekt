@@ -15,21 +15,16 @@ namespace Project
             Név = név;
         }
 
-        public string Gondozza(Állat állat)
-        {
-            return $"{Név} gondozza {állat.Név}-t.";
-        }
-
         public string Tisztít(Ketrec ketrec)
         {
-            return $"{Név} tisztítja a {ketrec.Név}."; 
+            return $"{Név} tisztítja a(z) {ketrec.Név}."; 
         }
 
         public string Etet(Ketrec ketrec)
         {
             string temp = "";
             foreach (var item in ketrec.Állat)
-                temp += $"{Név} eteti {item.Név}-t, a {item.Fajta}-t";
+                temp += $"{Név} eteti {item.Név}-t, a(z) {item.Fajta}-t";
             return temp;
         }
     }
