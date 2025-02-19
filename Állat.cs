@@ -24,7 +24,7 @@ namespace Project
 
         public string Mozog()
         {
-            return $"{Név}, a {Fajta}, mozog.";
+            return $"{Név}, a {Fajta}, helyváltoztatást végzett.";
         }
     }
 

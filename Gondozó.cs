@@ -22,15 +22,15 @@ namespace Project
 
         public string Tisztít(Ketrec ketrec)
         {
-            return $"{Név} tisztítja a {ketrec.Név} ketrecet."; // Fixed the wording here
+            return $"{Név} tisztítja a {ketrec.Név}."; 
         }
 
         public string Etet(Ketrec ketrec)
         {
             string temp = "";
             foreach (var item in ketrec.Állat)
-                temp += $"{Név} eteti {item.Név}-t, a {item.Fajta}-t\n";
-            return temp; // Add feeding functionality
+                temp += $"{Név} eteti {item.Név}-t, a {item.Fajta}-t";
+            return temp;
         }
     }
 
