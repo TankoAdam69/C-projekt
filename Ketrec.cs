@@ -17,15 +17,6 @@ namespace Project
             this.Állat = állat;
         }
 
-        public string Nyitás()
-        {
-            return $"{Név} ketrec nyitva.";
-        }
-
-        public string Zárás()
-        {
-            return $"{Név} ketrec zárva.";
-        }
 
     }
 }
