@@ -27,7 +27,10 @@ namespace Project
 
         public string Etet(Ketrec ketrec)
         {
-            return $"{Név} eteti {ketrec.Állat.Név}-t, a {ketrec.Állat.Fajta}-t."; // Add feeding functionality
+            string temp = "";
+            foreach (var item in ketrec.Állat)
+                temp += $"{Név} eteti {item.Név}-t, a {item.Fajta}-t\n";
+            return temp; // Add feeding functionality
         }
     }
 

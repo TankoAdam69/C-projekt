@@ -9,12 +9,12 @@ namespace Project
     public class Ketrec
     {
         public string Név { get; set; }
-        public Állat Állat { get; set; }
+        public List<Állat> Állat { get; set; }
 
-        public Ketrec(string név, Állat állat)
+        public Ketrec(string név, List<Állat> állat)
         {
             Név = név;
-            Állat = állat;
+            this.Állat = állat;
         }
 
         public string Nyitás()
@@ -28,3 +28,4 @@ namespace Project
         }
 
     }
+}
